@@ -1,0 +1,50 @@
+.home-content{
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.title{
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+.text-container{
+    flex: 3;
+}
+.wrapper{
+    padding-right: 100px;
+}
+.about{
+    margin-bottom: 20px;
+}
+
+.boxes{
+    display: flex;
+    justify-content: space-between;
+}
+.box>p{
+    font-weight: bold;
+    font-size: 36px;
+    
+}
+.box>span{
+    font-size: 20px;
+}
+.box{
+    flex: 1;
+}
+.bg-container{
+    flex: 2;
+    background-color: #fcf5f3;
+    position: relative;
+    height: 100%;
+
+}
+.bg-container>img{
+    position: absolute;
+    width: 115%;
+    height: auto;
+    right: 0;
+    max-height: 85vh;
+    object-fit: cover;
+}

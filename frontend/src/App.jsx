@@ -1,13 +1,16 @@
 import './App.css'
-
+import HomePage from './components/routes/HomePage';
+import Navbar from './components/navbar/Navbar';
 function App() {
-
-
   return (
-    <>
-      <p>hello</p>
-    </>
-  )
+    <div className="layout">
+      <div className="navbar">
+        <Navbar />
+      </div>
+      <div className="content">
+        <HomePage />
+      </div>
+    </div>
+  );
 }
-
 export default App
