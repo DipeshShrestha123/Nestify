@@ -1,0 +1,23 @@
+.list-page-content-container{
+    display: flex;
+    height: 100%;
+}
+.list-page-content{
+    flex: 3;
+    
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* Hide scrollbar in Internet Explorer/Edge */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+.list-page-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding-right: 60px;
+}
+.list-page-content::-webkit-scrollbar {
+    width: 0; /* Hide scrollbar in WebKit browsers (Chrome, Safari, etc.) */
+  }
+.list-page-map-content{
+    flex: 2;
+}

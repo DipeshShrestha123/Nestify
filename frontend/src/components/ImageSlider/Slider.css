@@ -1,0 +1,39 @@
+.fullSlider {
+    position: fixed; /* Ensure full screen overlay */
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.812);
+    height: 100vh;
+    width: 100%; 
+    display: flex;
+    z-index: 99999;
+}
+
+.slideContainer{
+    display: flex;
+    height: 350px;
+    gap: 20px;
+    width: 100%;
+    cursor: pointer;
+}
+.bigImage{
+    flex: 3;
+}
+.bigImage img{
+    object-fit: cover;
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+}
+.smallImage{
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+.smallImage img{
+    object-fit: cover;
+    width: 100%;
+    height: calc(100%/3.4);
+    border-radius: 10px;
+}

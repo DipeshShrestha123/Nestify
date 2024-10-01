@@ -1,15 +1,17 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const app = express();
-const dot = require("dotenv");
-dot.config();  // Load environment variables
-const authroute = require("../backend/routes/auth.route.js");
-const cookieParser = require("cookie-parser");
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import authRoute from "../backend/routes/auth.route.js"; // Adjust path as necessary
+import cookieParser from "cookie-parser";
 
+dotenv.config(); // Load environment variables
+
+const app = express();
 const PORT = 8080;
 
 app.use(cookieParser());
 app.use(express.json());
+
 const MONGO_URL = process.env.MONGO_URL;
 
 // Connect to MongoDB
@@ -19,7 +21,7 @@ async function main() {
         console.log("Connected to DB");
     } catch (err) {
         console.error("Failed to connect to DB", err);
-        process.exit(1);  // Exit process with failure code
+        process.exit(1); // Exit process with failure code
     }
 }
 
@@ -35,4 +37,4 @@ app.get("/", (req, res) => {
     res.send("hey");
 });
 
-app.use("/auth",authroute);
+app.use("/auth", authRoute);

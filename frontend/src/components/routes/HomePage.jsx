@@ -1,37 +1,38 @@
-import "../routes/HomePage.css"
+import homepageCss from "../routes/HomePage.module.css";
 import SearchBar from "../SearchBar/SearchBar";
-import "../../../public/bg.png"
-export default function HomePage(){
-    return(
-        <>
-        <div className="home-content">
-            <div className="text-container">
-                <div className="wrapper">
-                <h1 className="title">Find Real Estate & Get Your Dream Place</h1>
-                <p className="about">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores facere fugiat ut cumque reprehenderit debitis necessitatibus repellat molestiae ipsa assumenda? Ratione, molestias! Facilis optio autem pariatur eligendi nihil cumque voluptatem illo, repellendus omnis dolor aliquam maxime, asperiores consectetur perferendis hic?</p>
-                <SearchBar />
-                <div className="boxes">
-                    <div className="box">
-                        <p>16+ </p>
-                        <span>Years of Experince</span>
-                    </div>
-                    <div className="box">
-                        <p>16+ </p>
-                        <span>Years of Experince</span>
-                    </div>
-                    <div className="box">
-                        <p>16+ </p>
-                        <span>Years of Experince</span>
-                    </div>
 
-                </div>
+export default function HomePage() {
+    return (
+        <div className={`${homepageCss.homecontent}`}>
+            <div className={`${homepageCss.textcontainer}`}>
+                <div className={`${homepageCss.wrapper}`}>
+                    <h1 className={`${homepageCss.title}`}>
+                        Find Real Estate & Get Your Dream Place
+                    </h1>
+                    <p className={`${homepageCss.about}`}>
+                        Discover your dream home with ease. Whether you're buying or renting, we provide expert guidance to help you find the perfect place. Our agents are committed to making your real estate journey smooth, transparent, and stress-free.
+                    </p>
+                    <SearchBar />
+                    <div className={`${homepageCss.boxes}`}>
+                        <div className={`${homepageCss.box}`}>
+                            <p>16+</p>
+                            <span>Years of Experience</span>
+                        </div>
+                        <div className={`${homepageCss.box}`}>
+                            <p>200</p>
+                            <span>Awards Gained</span>
+                        </div>
+                        <div className={`${homepageCss.box}`}>
+                            <p>2000+</p>
+                            <span>Properties Ready</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div className="bg-container">
-                <img src="/bg.png" alt="" />
+            <div className={`${homepageCss.bgcontainer}`}>
+                <img src="/bg.png" alt="Background depicting real estate" />
             </div>
         </div>
-        </>
     );
 }

@@ -1,43 +1,44 @@
-const mongoose = require("mongoose");
-const schema = mongoose.Schema;
+import mongoose from "mongoose";
 
+const { Schema } = mongoose;
 
-const userSchema = new schema({
+const userSchema = new Schema({
     username: {
-      type: String,
-      required: true,
-      unique: true, // Ensure usernames are unique
-      trim: true, // Remove any extra whitespace
-      minlength: 3, // Minimum length for username
-      maxlength: 30 // Maximum length for username
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        minlength: 3,
+        maxlength: 30
     },
     email: {
-      type: String,
-      required: true,
-      unique: true, // Ensure email addresses are unique
-      trim: true,
-      lowercase: true, // Convert email to lowercase
-      minlength: 5, // Minimum length for email
-      maxlength: 255, // Maximum length for email
-      match: /.+\@.+\..+/ // Basic email format validation
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        lowercase: true,
+        minlength: 5,
+        maxlength: 255,
+        match: /.+\@.+\..+/
     },
     password: {
-      type: String,
-      required: true,
-      minlength: 6 // Minimum length for password
+        type: String,
+        required: true,
+        minlength: 6
     },
     createdAt: {
-      type: Date,
-      default: Date.now // Automatically set to the current date/time
+        type: Date,
+        default: Date.now
     },
     updatedAt: {
-      type: Date,
-      default: Date.now,
-      // Using a setter to update the timestamp on save
-      set: function () {
-        return new Date();
-      }
+        type: Date,
+        default: Date.now,
+        set: function () {
+            return new Date();
+        }
     }
 });
+
 const User = mongoose.model('User', userSchema);
-module.exports = User;
+
+export default User;

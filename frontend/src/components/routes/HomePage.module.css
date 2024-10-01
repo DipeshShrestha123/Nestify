@@ -1,0 +1,93 @@
+.homecontent{
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+body{
+    overflow: hidden;
+}
+
+.title{
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+.textcontainer{
+    flex: 3;
+}
+.wrapper{
+    padding-right: 100px;
+}
+.about{
+    margin-bottom: 20px;
+    font-size: 16px
+}
+
+.boxes{
+    display: flex;
+    justify-content: space-between;
+}
+.box>p{
+    font-weight: bold;
+    font-size: 32px;
+    
+}
+.box>span{
+    font-size: 18px;
+    font-weight: 100;
+}
+.box{
+    flex: 1;
+}
+.bgcontainer{
+    flex: 2;
+    position: relative;
+    height: 100%;
+
+}
+.bgcontainer>img{
+    position: absolute;
+    width: 115%;
+    height: auto;
+    right: 0;
+    max-height: 85vh;
+    object-fit: cover;
+}
+
+/* big screen its should be in descending order */
+@media (max-width:1366px){
+    .title {
+        font-size: 58px;
+    }
+}
+
+@media (max-width:1268px){
+    .title {
+        font-size: 52px;
+    }
+    .box>p{
+        font-size: 28px;
+    }
+    .box>span{
+        font-size: 16px;
+    }
+}
+
+@media (max-width:1140px){
+        .title {
+            font-size: 44px;
+        }
+        .box>p{
+            font-size: 26px;
+        }
+        .box>span{
+            font-size: 14px;
+        }
+    }
+
+/* mid screen */
+@media (max-width:1024px){
+    .bgcontainer{
+        display: none;
+    }
+
+}

@@ -1,0 +1,70 @@
+.searchbar{
+    margin-bottom: 20px;
+}
+.typebtn{
+    padding: 10px 24px;
+    border: 1px solid #999;
+    text-transform: capitalize;
+    cursor: pointer;
+    border-bottom: none;
+}
+.active{
+    background-color: black;
+    color: white;
+}
+.typebtn:first-child{
+    border-top-left-radius: 5px;
+    border-right: none;
+}
+.typebtn:last-child{
+    border-top-right-radius: 5px;
+    border-left: none;
+}
+form{
+    display: flex;
+    border: 1px solid #999;
+    height: 64px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.homeinput{
+    padding: 0 10px;
+    width: 12rem;
+    border: none;
+}
+.searchbtn{
+    background-color: #fece51;
+    flex: 1;
+    border: none;
+    cursor: pointer;
+}
+.searchimg{
+    width: 30px;
+}
+
+/* big screen its should be in descending order */
+@media (max-width:1268px){
+    
+    .homeinput{
+        width: 10rem;
+    }
+}
+
+@media (max-width:1140px){
+        .homeinput{
+            width: 9rem;
+        }
+    }
+
+/* mid screen */
+@media (max-width:1024px){
+    .homeinput{
+        width: 13rem;
+    }
+
+}
+@media (max-width:876px){
+    .homeinput{
+        width: 12rem;
+    }
+}

@@ -1,0 +1,32 @@
+.singlePageContainer{
+    display: flex;
+    height: 100%;
+}
+.details{
+    flex: 3;
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding-right: 60px;
+    height: 100vh;
+}
+.featuresContainer{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.address img{
+    width: 30px;
+}
+.generalFeatureItem img{
+    width: 30px;
+}
+.roomFeatureItems{
+    display: flex;
+}
+.roomFeatureItem img{
+    width: 30px;
+}

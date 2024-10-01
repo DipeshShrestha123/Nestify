@@ -1,78 +1,90 @@
-const express = require("express");
-const bcrypt = require("bcrypt");
-const User = require("../models/user.js");
-const jwt = require("jsonwebtoken");
+import express from "express";
+import bcrypt from "bcrypt";
+import User from "../models/user.js";
+import jwt from "jsonwebtoken";
+import ApiError from "../utils/ApiError.js";
+import ApiResponse from "../utils/ApiResponse.js";
 
 const SignUp = async (req, res) => {
-    // Handle sign up logic here
+    // get user detail from frontend
+    // validation - is not empty
+    // check if user already existed or not
+    // check for images, check for avatar
+    // upload them to cloudinary(anywhere) , avatar(images)
+    // create  a user obj - create a entry in db
+    // remove password and refresh token field from response
+    // check user for creation
+    // return res
     try {
-        const {username ,email , password} = req.body;
-        const hashpassword =  await bcrypt.hash(password,10);
-    
+        // get user detail from frontend
+        const { username, email, password } = req.body;
+
+        // Validation - check if fields are not empty
+        if ([username, email, password].some((field) => field?.trim() === "")) {
+            throw new ApiError(400, "All fields are required");
+        }
+
+        // Check if user already exists
+        const userExists = await User.findOne({ username });
+        if (userExists) {
+            throw new ApiError(403, "Username already exists");
+        }
+
+        // Create a new user
+        const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({
-        username: username,
-        email : email,
-        password : hashpassword
-    });
-    await newUser.save();
-    res.status(201).json({message : "User Created Successfully"});
-} catch(err){
-    console.log(err);
-    res.status(500).json({message : "User Creation Failed"});
+            username,
+            email,
+            password: hashedPassword,
+        });
+        await newUser.save();
+        return res.status(201).json(new ApiResponse(201, newUser, "User created successfully"));
+    } catch (err) {
+        console.error(err);
+        const errorResponse = new ApiResponse(err.statusCode || 500, null, err.message || "User creation failed");
+        return res.status(errorResponse.statusCode).json(errorResponse);
     }
 };
 
 const LogIn = async (req, res) => {
+    try {
+        
+        const { username, password } = req.body;
 
-    try{
-        const {username , password} = req.body;
-
-        const user = await User.findOne({
-            username
-        });
-        if(!user){
-            console.log("user not found");
-            return res.status(404).json({message : "User not found"});
-        }
-        const isPasswordValid = await bcrypt.compare(password,user.password);
-        if(!isPasswordValid){
-            console.log("invalid credential");
-            return res.status(401).json({message : "Invalid credentials"});
+        const user = await User.findOne({ username });
+        if (!user) {
+            throw new ApiError(404, "User not found");
         }
 
-        // cookie genrate
-        const payload = {
-            user_id : user._id,
-            Username : user.username
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            throw new ApiError(401, "Invalid credentials");
         }
-        const Age = 1000*60*60*24*7;
 
-        const token = jwt.sign(payload,process.env.JWT_SECRET_KEY,{
-            expiresIn : Age,
+        // Generate token
+        const payload = { user_id: user._id, username: user.username };
+        const age = 1000 * 60 * 60 * 24 * 7; // 1 week
 
-        });
-        res.cookie("token",token,{
-            httpOnly : true,
-            maxAge : Age,
-        });
-        res.status(200).json({message : "User login Success"});
+        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: age });
+        res.cookie("token", token, { httpOnly: true, maxAge: age });
 
-    }catch(err){
-        console.log(err);
-        res.status(500).json({message : "User login Failed"});
+        return res.status(200).json(new ApiResponse(200, { message: "User login successful" }));
+    } catch (err) {
+        console.error(err);
+        const errorResponse = new ApiResponse(err.statusCode || 500, null, err.message || "User login failed");
+        return res.status(errorResponse.statusCode).json(errorResponse);
     }
-
 };
 
-const LogOut = async (req,res) => {
-    try{
+const LogOut = async (req, res) => {
+    try {
         res.clearCookie("token");
-        res.status(200).json({message : "User logout Success"});
-    }catch(err){
-        console.log(err);
-        res.status(500).json({message : "User logout Failed"});
+        return res.status(200).json(new ApiResponse(200, null, "User logout successful"));
+    } catch (err) {
+        console.error(err);
+        const errorResponse = new ApiResponse(err.statusCode || 500, null, err.message || "User logout failed");
+        return res.status(errorResponse.statusCode).json(errorResponse);
     }
-    
 };
 
-module.exports = { SignUp, LogIn, LogOut };
+export { SignUp, LogIn, LogOut };

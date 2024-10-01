@@ -1,0 +1,9 @@
+.map {
+    height: 88vh;
+    width: 100%;
+    border: 1px solid #999;
+    border-radius: 10px;
+}
+.hey{
+    border: 10px solid blue;
+}

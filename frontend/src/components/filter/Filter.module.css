@@ -1,0 +1,50 @@
+.searchrs{
+    font-size: 28px;   
+    margin-bottom: 10px;
+}
+.locationtext{
+    font-size: 14px;
+    margin-bottom: 2px;
+    font-weight: 500;
+}
+.inputlocation{
+    margin-bottom: 10px;
+    height: 40px;
+    width: 100%;
+    border: 1px solid #999;
+    padding: 5px;
+    font-size: 14px;
+}
+.itemcontainer{
+    display: flex;
+    justify-content: space-between;
+    height: 64px;
+    gap: 30px;
+}
+.item{
+    width: 5rem;
+}
+.selectbtn{
+    width: 7rem;
+    height: 2.8rem;
+    padding: 0px 6px;
+    border: 1px solid #999;
+    color: #555;
+    border-radius: 5px;
+}
+label{
+    font-size: 12px;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.filtersearchbtn{
+    flex: 0.6;
+    background-color: #fece51;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.searchimg{
+    width: 30px;
+}
