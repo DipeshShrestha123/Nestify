@@ -1,56 +1,62 @@
-import FilterCss from "../filter/Filter.module.css";
+import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import "../filter/Filter.scss";
 
 export default function Filter({ location }) {
-    return (
-        <div className={`${FilterCss.filtercontainer}`}>
-            <p className={`${FilterCss.searchrs}`}>
-                Search results for <b>{location}</b>
-            </p>
-            <p className={`${FilterCss.locationtext}`}>Location</p>
-            <input type="text" placeholder="City Location" className={`${FilterCss.inputlocation}`} />
+    const navigate = useNavigate();
+    const queryParams = new URLSearchParams(useLocation().search);
 
-            <div className={`${FilterCss.itemcontainer}`}>
-                <div className={`${FilterCss.item}`}>
+    const [filters, setFilters] = useState({
+        location: queryParams.get("location") || location || "",
+        type: queryParams.get("type") || "any",
+        property: queryParams.get("property") || "any",
+        minPrice: queryParams.get("minPrice") || "",
+        maxPrice: queryParams.get("maxPrice") || "",
+        bedroom: queryParams.get("bedroom") || "any",
+    });
+
+    const handleChange = (e) => {
+        setFilters({ ...filters, [e.target.name]: e.target.value });
+    };
+
+    const applyFilters = () => {
+        const params = new URLSearchParams();
+        if (filters.location) params.set("location", filters.location);
+        if (filters.type !== "any") params.set("type", filters.type);
+        if (filters.property !== "any") params.set("property", filters.property);
+        if (filters.minPrice) params.set("minPrice", filters.minPrice);
+        if (filters.maxPrice) params.set("maxPrice", filters.maxPrice);
+        if (filters.bedroom !== "any") params.set("bedroom", filters.bedroom);
+
+        navigate(`/list?${params.toString()}`);
+    };
+
+    return (
+        <div className="filter-container">
+            <p className="search-results">
+                Search results for <b>{filters.location}</b>
+            </p>
+            <input type="text" name="location" placeholder="City Location" className="input-location" value={filters.location} onChange={handleChange} />
+
+            <div className="item-container">
+                <div className="item">
                     <label htmlFor="type">Type</label>
-                    <select name="type" className={`${FilterCss.selectbtn}`} id="type">
-                        <option value="any">any</option>
-                        <option value="buy">buy</option>
-                        <option value="rent">rent</option>
+                    <select name="type" className="select-btn" id="type" value={filters.type} onChange={handleChange}>
+                        <option value="any">Any</option>
+                        <option value="buy">Buy</option>
+                        <option value="rent">Rent</option>
                     </select>
                 </div>
-                <div className={`${FilterCss.item}`}>
-                    <label htmlFor="property">Property</label>
-                    <select name="property" className={`${FilterCss.selectbtn}`} id="property">
-                        <option value="any">any</option>
-                        <option value="apartment">Apartment</option>
-                        <option value="house">House</option>
-                        <option value="villa">Villa</option>
-                    </select>
-                </div>
-                <div className={`${FilterCss.item}`}>
+                <div className="item">
                     <label htmlFor="minprice">Min Price</label>
-                    <select name="minprice" className={`${FilterCss.selectbtn}`} id="minprice">
-                        <option value="any">any</option>
-                        <option value="minadd">minadd</option>
-                    </select>
+                    <input type="number" name="minPrice" className="select-btn" value={filters.minPrice} onChange={handleChange} />
                 </div>
-                <div className={`${FilterCss.item}`}>
+                <div className="item">
                     <label htmlFor="maxprice">Max Price</label>
-                    <select name="maxprice" className={`${FilterCss.selectbtn}`} id="maxprice">
-                        <option value="any">any</option>
-                        <option value="maxadd">max add</option>
-                    </select>
+                    <input type="number" name="maxPrice" className="select-btn" value={filters.maxPrice} onChange={handleChange} />
                 </div>
-                <div className={`${FilterCss.item}`}>
-                    <label htmlFor="bedroom">Bedroom</label>
-                    <select name="bedroom" className={`${FilterCss.selectbtn}`} id="bedroom">
-                        <option value="any">any</option>
-                        <option value="double">Double</option>
-                        <option value="single">Single</option>
-                    </select>
-                </div>
-                <button className={`${FilterCss.filtersearchbtn}`}>
-                    <img src="/search.png" className={`${FilterCss.searchimg}`} alt="Search" />
+                <button className="filter-search-btn" onClick={applyFilters}>
+                    <img src="/search.png" className="search-img" alt="Search" />
                 </button>
             </div>
         </div>

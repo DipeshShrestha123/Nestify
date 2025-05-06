@@ -1,0 +1,54 @@
+.list-page-content-container { 
+    display: flex;
+    height: 100%;
+    .list-page-content {
+        flex: 3;
+        overflow-y: scroll;
+        -ms-overflow-style: none; /* Hide scrollbar in Internet Explorer/Edge */
+        scrollbar-width: none; /* Hide scrollbar in Firefox */
+    
+        &::-webkit-scrollbar {
+            width: 0; /* Hide scrollbar in WebKit browsers (Chrome, Safari, etc.) */
+        }
+        .list-page-wrapper {
+            display: flex;
+            flex-direction: column;
+            padding-right: 60px;
+            .Listing{
+                margin-top: 20px;
+            }
+        }
+    }
+    .list-page-map-content {
+        flex: 2;
+        height: 88vh;
+    }
+    @media (max-width: 1370px) {
+        .list-page-map-content {
+            flex: 1.8;
+        }
+    }
+    @media (max-width: 1275px) {
+        .list-page-map-content {
+            flex: 1.5;
+        }
+    }
+    @media (max-width: 1125px) {
+        .list-page-map-content {
+            display: none;
+            flex: 0;
+        }
+    }
+
+    @media (max-width: 999px) {
+        .list-page-wrapper {
+            padding: 0px !important;
+        }
+    }
+    
+}
+
+
+
+
+

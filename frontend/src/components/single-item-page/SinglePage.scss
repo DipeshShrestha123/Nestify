@@ -1,0 +1,291 @@
+.single-page-container {
+    display: flex;
+    height: 100%;
+    overflow-y: hidden;
+    .details {
+      flex: 3;
+      padding-right: 30px;
+      width: 60px;
+      scrollbar-width: none;
+     -ms-overflow-style: none;
+      &::-webkit-scrollbar{
+        display: none;
+      }
+      .wrapper {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        gap: 16px;
+        height: 100vh;
+        .detail-cont{
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: center;
+          gap: 10px;
+          .user{
+              width: 9rem;
+              height: 20vh;
+              background-color: #fecd5292;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              gap: 10px;
+              padding: 0px 50px;
+              border-radius: 10px;
+              img{
+                  border-radius: 50%;
+                  object-fit: cover;
+                  width: 80px;
+                  height: 80px;
+  
+              }
+          }
+  
+        .info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+          h1 {
+            font-size: 2rem;
+            width: max-content;
+          }
+          .price{
+            width: max-content;
+            padding: 10px 20px;
+            background-color: #fecd5292;
+            border-radius: 8px;
+        }
+  
+          .address {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+  
+            img {
+              width: 16px;
+              height: 16px;
+            }
+  
+            span {
+              font-size: 1rem;
+              color: #555;
+            }
+          }
+
+        }
+      }
+      @media (max-width: 608px) {
+        .detail-cont{
+          gap:0px ;
+          .user{
+            height: 16vh;
+            img{
+              width: 60px;
+              height: 60px;
+
+          }
+          }
+        }
+        .info-container {
+          h1{
+            font-size: 1.5rem !important;
+          }
+          span{
+            font-size: 1.2rem !important;
+          }
+        }
+        
+      }
+
+      @media (max-width: 512px) {
+        .detail-cont{
+          gap:0px ;
+          .user{
+            width: 6rem;
+            height: 14vh;
+          }
+        }
+        .info-container {
+          h1{
+            font-size: 1rem !important;
+          }
+          span{
+            font-size: 1rem !important;
+          }
+        }
+        
+      }
+  
+        .desc {
+          font-size: 1rem;
+          line-height: 1.6;
+          color: #777;
+        }
+      }
+      @media (max-width: 1026px) {
+        .wrapper {
+          height: max-content;
+          margin-bottom: 30px;
+        }
+      }
+    }
+    @media (max-width: 1026px) {
+      .details{
+        flex: 1;
+        width: fit-content;
+      }
+    }
+    
+  
+    .features-container {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100vh;
+  
+      b {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+  
+      .general-feature-items{
+        display: flex;
+        gap: 20px;
+        justify-content: start;
+        align-items: start;
+        margin-right: 20px;
+        flex-direction: column;
+        background-color: #ffffff;
+  
+        .general-feature-item{
+          display: flex;
+          width: 100%;
+          align-items: center;
+          text-align: center;
+          gap: 10px;
+          .VerticalList{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            span{
+              width: max-content;
+              color: #000000;
+            }
+          }
+  
+          img {
+            width: 30px;
+            // margin-bottom: 10px;
+          }
+  
+          span {
+            font-size: 0.9rem;
+            color: #555;
+  
+            &:first-of-type {
+              font-weight: bold;
+              // margin-bottom: 5px;
+            }
+          }
+        }
+      }
+      
+      .room-feature-items{
+        display: flex;
+        justify-content: space-between;
+        margin-right: 20px;
+        flex-wrap: wrap;
+        .room-feature-item{
+          display: flex;
+          gap: 6px;
+          align-items: center;
+          justify-content: center;
+          margin-right: 10px;
+          padding: 10px 20px;
+          background-color: #ffffff;
+          border-radius: 25px;
+          img{
+            width: 25px;
+          }
+          span{
+            font-size: 1rem;
+          }
+        }
+
+      }
+      .map-container {
+        width: 95%;
+        height: 200px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        color: #888;
+        z-index: 1;
+        border: none;
+      }
+      .Buttons{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        margin-right: 20px;
+        button{
+          padding: 20px;
+          background-color: #ffffff;
+          border-radius: 12px;
+          border:2px solid #fecd5292;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.9rem;
+          cursor: pointer;
+        }
+        
+        
+        img{
+          width: 25px;
+
+        }
+      }
+      @media (max-width: 420px) {
+        .Buttons{
+          gap: 16px;
+          button{
+            padding: 10px;
+            flex: 0.5;
+            font-size: 11px;
+          }
+        }
+        
+      }
+    }
+    @media (max-width: 1026px) {
+      .features-container{
+        margin-bottom: 40px;
+        flex: 1;
+      }
+    }
+
+
+  }
+  @media (max-width: 1026px) {
+    .single-page-container {
+      flex-direction: column;
+      overflow-y: scroll;
+      -ms-overflow-style: none; /* Hide scrollbar in Internet Explorer/Edge */
+      scrollbar-width: none; /* Hide scrollbar in Firefox */
+  
+      &::-webkit-scrollbar {
+          width: 0; /* Hide scrollbar in WebKit browsers (Chrome, Safari, etc.) */
+      }
+    }
+    .wrapper{
+      height: 60vh ;
+    }
+  }

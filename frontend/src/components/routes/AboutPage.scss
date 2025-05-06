@@ -1,0 +1,143 @@
+// Variables
+$primary-color: #333;
+$secondary-color: #666;
+$background-color: #f9f9f9;
+$cta-button-color: #007bff;
+$cta-button-hover-color: #0062cc;
+
+// General Styles
+.about-page {
+  padding: 20px;
+  text-align: center;
+  background-color: $background-color;
+  
+}
+
+// Hero Section
+.about-hero {
+  color: white;
+  padding: 100px 20px;
+  
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.5rem;
+  }
+}
+
+// Intro Section
+.about-intro {
+  margin: 40px 0;
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: $primary-color;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: $secondary-color;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+}
+
+// Mission Section
+.about-mission {
+  margin: 40px 0;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: $primary-color;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: $secondary-color;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+}
+
+// Team Section
+.about-team {
+  margin: 40px 0;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: $primary-color;
+  }
+
+  .team-members {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+
+    .team-member {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 260px;
+
+      img {
+        width: 100%;
+        height: 200px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: $primary-color;
+      }
+
+      p {
+        font-size: 1rem;
+        color: $secondary-color;
+      }
+    }
+  }
+}
+
+
+.about-cta {
+  margin: 40px 0;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: $primary-color;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: $secondary-color;
+    margin-bottom: 20px;
+  }
+
+  .cta-button {
+    background-color: $cta-button-color;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $cta-button-hover-color;
+    }
+  }
+}

@@ -1,14 +1,13 @@
-import LayoutCss from "../layout/Layout.module.css";
-import Navbar from "../navbar/Navbar";
 import { Outlet } from "react-router-dom";
-
+import Navbar from "../navbar/Navbar";
+import "./Layout.scss"
 export default function Layout() {
     return (
-        <div className={`${LayoutCss.layout}`}>
-            <div className={`${LayoutCss.navbar}`}>
+        <div className="layout">
+            <div className="navbar">
                 <Navbar />
             </div>
-            <div className={`${LayoutCss.content}`}>
+            <div className="content">
                 <Outlet />
             </div>
         </div>

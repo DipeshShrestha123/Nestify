@@ -1,0 +1,23 @@
+.Chat-Container{
+    .Message-Notif-Sec{
+        .Message-Sec-Title{
+            font-size: 2rem;
+        }
+        .Message-Notif-Sec-Cont{
+            height: 100vh; //55vh
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+            gap: 16px;
+            overflow-y: scroll;
+            padding-bottom: 10rem;
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        
+            &::-webkit-scrollbar {
+              width: 0; 
+            }
+        }
+    }
+    
+}

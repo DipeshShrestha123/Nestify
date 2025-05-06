@@ -17,6 +17,7 @@ export const listdata = [
       price: 1500,
       location: "Malibu",
       country: "United States",
+      Adress: "House no 611 AAli village"
     },
     {
       _id: "f6g7h8i9j0",
@@ -36,6 +37,8 @@ export const listdata = [
       longitude: -118.344234,
       location: "New York City",
       country: "United States",
+      Adress: "House no A-201 AAli village"
+
     },
     {
       _id: "k1l2m3n4o5",
@@ -55,6 +58,8 @@ export const listdata = [
       price: 1000,
       location: "Aspen",
       country: "United States",
+      Adress: "House no A-285 AAli village"
+
     },
     {
       _id: "p6q7r8s9t0",
@@ -74,6 +79,8 @@ export const listdata = [
       price: 1200,
       location: "Florence",
       country: "Italy",
+      Adress: "House no 611 AAli village"
+
     },
     {
       _id: "u1v2w3x4y5",
@@ -93,6 +100,8 @@ export const listdata = [
       price: 800,
       location: "Portland",
       country: "United States",
+      Adress: "House no 611 AAli village"
+
     },
     
   ];
@@ -386,3 +395,16 @@ export const listdata = [
   //   location: "Costa Rica",
   //   country: "Costa Rica",
   // },
+
+
+export const userdata = [
+  {
+    _id: "a1b2c3d4e5",
+    UserName: "Dipesh",
+    Email: "dipeshshrestha876@gmail.com",
+    description: "Escape to this charming beachfront cottage for a relaxing getaway. Enjoy stunning ocean views and easy access to the beach.",
+    UserImg: [
+        "https://a0.muscache.com/im/pictures/miso/Hosting-963519438034227089/original/e94c46e4-9535-464a-b636-26e9cef52e89.jpeg?im_w=960",
+      ],
+  }
+]

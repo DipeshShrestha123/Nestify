@@ -1,0 +1,39 @@
+.layout {
+  height: 100vh;
+  max-width: 1366px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+
+  .content {
+      flex: 1;
+      height: calc(100vh - 100px);
+      overflow-y: scroll;
+      -ms-overflow-style: none; /* Hide scrollbar in Internet Explorer/Edge */
+      scrollbar-width: none; /* Hide scrollbar in Firefox */
+  
+      &::-webkit-scrollbar {
+          width: 0; /* Hide scrollbar in WebKit browsers (Chrome, Safari, etc.) */
+      }
+  }
+
+  /* Media queries for responsive design */
+  @media (max-width: 1366px) {
+      max-width: 1280px;
+  }
+
+  @media (max-width: 1268px) {
+      max-width: 1200px;
+  }
+
+  @media (max-width: 1024px) {
+      max-width: 898px;
+  }
+
+  @media (max-width: 799px) {
+      max-width: 730px;
+  }
+}

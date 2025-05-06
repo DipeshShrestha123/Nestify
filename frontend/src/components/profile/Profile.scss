@@ -1,0 +1,73 @@
+.Profile-Page{
+    display: flex;
+    .Details{
+        flex: 3;
+        .Wrapper{
+            width: 95%;
+        .Title{
+            margin: 0px 10px 16px 0px;
+            display: flex;
+            justify-content: space-between;
+            p{
+                font-size: 2rem;
+            }
+            button{
+                flex: 0.3;
+                background-color: #fece51;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        }
+        .About-User{
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+            span {
+                display: flex;
+                align-items: center;
+                gap: 18px;
+                img{
+                    border-radius: 50%;
+                    object-fit: cover;
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+        }
+        .My-List{
+            margin: 0px 10px 16px 0px;
+            display: flex;
+            justify-content: space-between;
+            span{
+                font-size: 2rem;
+                font-weight: 100;
+            }
+            button{
+                flex: 0.23;
+                background-color: #fece51;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        }
+        .My-Listing {
+            max-height: 80vh;
+            margin: 0px 40px 10px 0px;
+            padding-bottom: 10rem; 
+            overflow-y: scroll;
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        
+            &::-webkit-scrollbar {
+              width: 0; 
+            }
+          }
+        }
+    }
+    .Chat-Cont{
+        flex: 2;
+        overflow-x: hidden;
+    }
+}

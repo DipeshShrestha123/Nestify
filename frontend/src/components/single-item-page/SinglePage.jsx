@@ -1,82 +1,122 @@
-import React from 'react';
-import Slider from '../ImageSlider/Slider';
-import { useParams } from 'react-router-dom';
-import { listdata } from "../../lib/listdata"
-import SinglePageCss from "../single-item-page/SinglePage.module.css"; // Importing CSS module as `SinglePageCss`
+import React, { useState, useEffect } from "react";
+import Slider from "../ImageSlider/Slider";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import "./SinglePage.scss";
+import { userdata } from "../../lib/listdata";
+import Map from "../map/Map";
 
 export default function SinglePage() {
-  const { _id } = useParams(); // Get the id from the URL
-  const item = listdata.find((dataItem) => dataItem._id === _id); // Find the corresponding item
-  if (!item) {
-    return <div>Item not found</div>; // Handle item not found
-  }
-  return (
-    <div className={`${SinglePageCss.singlePageContainer}`}>
-      <div className={`${SinglePageCss.details}`}>
-        <div className={`${SinglePageCss.wrapper}`}>
-          {/* Slider Component */}
-          <Slider itemImages = {item.image} />
-          
-          {/* Info Section */}
-          <div className={`${SinglePageCss.infoContainer}`}>
-            <h1>{item.title}</h1>
-            <div className={`${SinglePageCss.address}`}>
-              <img src="/location.png" alt="pin" />
-              <span>{item.location}</span>
-            </div>
-            <div className={`${SinglePageCss.price}`}>
-              <span>{item.price}</span>
-            </div>
-          </div>
-          <p className={`${SinglePageCss.desc}`}>
-            {item.description}
-          </p>
-        </div>
-      </div>
-      
-      {/* Features Section */}
-      
-      <div className={`${SinglePageCss.featuresContainer}`}>
-        <b>General</b>
-        <div className={`${SinglePageCss.generalFeatureItems}`}>
-          <div className={`${SinglePageCss.generalFeatureItem}`}>
-            <img src="/utility.png" alt="" />
-            <span>Utilities</span><br />
-            <span>Renter is responsible</span>
-          </div>
-          <div className={`${SinglePageCss.generalFeatureItem}`}>
-            <img src="/pet.png" alt="" />
-            <span>Pet Policy</span><br />
-            <span>Pet {item.pet_allowed}</span>
-          </div>
-          <div className={`${SinglePageCss.generalFeatureItem}`}>
-            <img src="/fee.png" alt="" />
-            <span>Property Fees</span><br />
-            <span>Must have 3x the rent in total household income</span>
-          </div>
-        </div>
-        
-        <b>Room Sizes</b>
-        <div className={`${SinglePageCss.roomFeatureItems}`}>
-          <div className={`${SinglePageCss.roomFeatureItem}`}>
-            <img src="/size.png" alt="" />
-            <span>{item.room_size} 80Square</span>
-          </div>
-          <div className={`${SinglePageCss.roomFeatureItem}`}>
-            <img src="/bed.png" alt="" />
-            <span>{item.bedRooms}</span>
-          </div>
-          <div className={`${SinglePageCss.roomFeatureItem}`}>
-            <img src="/bath.png" alt="" />
-            <span>{item.bathRooms}</span>
-          </div>
-        </div>
+    const { _id } = useParams(); // Get the ID from the URL
+    const [item, setItem] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-        <b>Location</b>
-        <div className={`${SinglePageCss.mapContainer}`}>
-          Map
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080/listdata/${_id}`);
+                setItem(response.data);
+            } catch (err) {
+                setError("Failed to load data");
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, [_id]);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>{error}</div>;
+    if (!item) return <div>Item not found</div>;
+
+    return (
+      <div className="single-page-container">
+        <div className="details">
+          <div className="wrapper">
+            {/* Slider Component */}
+            <Slider itemImages={item.image} />
+  
+            {/* Info Section */}
+            <div className="detail-cont">
+              <div className="info-container">
+                <h1>{item.title}</h1>
+                <div className="address">
+                  <img src="/location.png" alt="pin" />
+                  <span>{item.location}</span>
+                </div>
+                <div className="price">
+                  <span>$ {item.price}</span>
+                </div>
+              </div>
+              <div className="user">
+                <img src={userdata[0].UserImg} alt="userImg" />
+                <span>{userdata[0].UserName}</span>
+              </div>
+            </div>
+            <p className="desc">{item.description}</p>
+          </div>
+        </div>
+  
+        {/* Features Section */}
+        <div className="features-container">
+          <b>General</b>
+          <div className="general-feature-items">
+            <div className="general-feature-item">
+              <img src="/utility.png" alt="" />
+              <div className="VerticalList">
+                <span>Utilities</span>
+                <span>Renter is responsible</span>
+              </div>
+              
+            </div>
+            <div className="general-feature-item">
+              <img src="/pet.png" alt="" />
+              <div className="VerticalList">
+                <span>Pet Policy</span>
+                <span>Pet {item.pet_allowed}</span>
+              </div>
+            </div>
+            <div className="general-feature-item">
+              <img src="/fee.png" alt="" />
+              <div className="VerticalList">
+                <span>Property Fees</span>
+                <span>Must have 3x the rent in total household income</span>
+                </div>
+            </div>
+          </div>
+  
+          <b>Room Sizes</b>
+          <div className="room-feature-items">
+            <div className="room-feature-item">
+              <img src="/size.png" alt="" />
+              <span>{item.room_size}80 Sqft</span>
+            </div>
+            <div className="room-feature-item">
+              <img src="/bed.png" alt="" />
+              <span>{item.bedRooms} beds</span>
+            </div>
+            <div className="room-feature-item">
+              <img src="/bath.png" alt="" />
+              <span>{item.bathRooms} bathroom</span>
+            </div>
+          </div>
+  
+          <b>Location</b>
+          <div className="map-container">
+            <Map items={[item]} />
+          </div>
+          <div className="Buttons">
+            <button>
+              <img src="/chat.png" alt="chat" />
+              Send a Message
+            </button>
+            <button>
+              <img src="/save.png" alt="save" />
+              Send the place
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
 }

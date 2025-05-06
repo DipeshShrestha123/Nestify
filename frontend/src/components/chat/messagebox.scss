@@ -1,0 +1,32 @@
+.MessageBox-Cont {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    margin-right: 20px;
+    cursor: pointer;
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  
+    .user-name {
+      font-weight: bold;
+      font-size: 18px;
+      color: #333;
+    }
+  
+    .user-message {
+      flex: 1;
+      font-size: 14px;
+      color: #555;
+      white-space: nowrap; 
+      overflow-x: hidden;
+      text-overflow: ellipsis; /* Displays ellipsis (…) for hidden text */
+    }
+  }
+  

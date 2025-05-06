@@ -1,0 +1,79 @@
+.agent-page {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+
+    .agent-header {
+        text-align: center;
+        padding: 40px 0;
+        background-color: #f8f8f8;
+        border-bottom: 1px solid #ddd;
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+    }
+
+    .agent-details {
+        display: flex;
+        justify-content: center;
+        padding: 40px 0;
+
+        .agent-info {
+            text-align: center;
+            max-width: 600px;
+
+            .agent-photo {
+                border-radius: 50%;
+                width: 150px;
+                height: 150px;
+                margin-bottom: 20px;
+            }
+
+            .agent-name {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+
+            .agent-title {
+                font-size: 1.5rem;
+                color: #666;
+                margin-bottom: 20px;
+            }
+
+            .agent-bio {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+
+            .agent-contact {
+                p {
+                    font-size: 1rem;
+                    margin: 5px 0;
+                }
+            }
+        }
+    }
+
+    .agent-footer {
+        text-align: center;
+        padding: 20px 0;
+        background-color: #f8f8f8;
+        border-top: 1px solid #ddd;
+        margin-top: 40px;
+
+        p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    }
+}
