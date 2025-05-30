@@ -1,22 +1,29 @@
 .Profile-Page{
     display: flex;
+    
     .Details{
         flex: 3;
         .Wrapper{
             width: 95%;
         .Title{
-            margin: 0px 10px 16px 0px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             p{
                 font-size: 2rem;
             }
-            button{
-                flex: 0.3;
+            @media (max-width: 500px) {
+                p{
+                    font-size: 1rem;
+                }
+            }
+            button{ 
                 background-color: #fece51;
                 border: none;
-                border-radius: 5px;
                 cursor: pointer;
+                 border-radius: 5px;
+                margin: 20px;
+                padding: 10px 24px;
             }
         }
         .About-User{
@@ -37,19 +44,25 @@
             }
         }
         .My-List{
-            margin: 0px 10px 16px 0px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             span{
                 font-size: 2rem;
                 font-weight: 100;
             }
+            @media (max-width: 500px) {
+                span{
+                    font-size: 1.2rem;
+                }
+            }
             button{
-                flex: 0.23;
                 background-color: #fece51;
                 border: none;
-                border-radius: 5px;
                 cursor: pointer;
+                 border-radius: 5px;
+                margin: 20px;
+                padding: 10px 24px;
             }
         }
         .My-Listing {
@@ -70,4 +83,11 @@
         flex: 2;
         overflow-x: hidden;
     }
+
+
 }
+ @media (max-width: 1268px) {
+        .Profile-Page{
+            flex-direction: column;
+        }
+     }

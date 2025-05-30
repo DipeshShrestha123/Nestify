@@ -11,6 +11,7 @@ import SinglePage from "./components/single-item-page/SinglePage";
 import Signin from "./components/signin/Signin";
 import Signup from "./components/signup/Signup";
 import Profile from "./components/profile/Profile";
+import ProtectedRoute from "./components/protected_route/ProtectedRoute";
 
 function App() {
   const { isLoggedIn } = useAuth();
@@ -28,7 +29,14 @@ function App() {
         { path: "/about", element: <AboutPage /> },
         { path: "/contact", element: <ContactPage /> },
         { path: "/agents", element: <AgentPage /> },
-        { path: "/profile",element : <Profile /> },
+        {
+          path: "/profile",
+         element: (
+           <ProtectedRoute>
+             <Profile />
+            </ProtectedRoute>
+             ),
+        }
       ],
     },
   ]);

@@ -140,3 +140,15 @@
     }
     
 }
+@media (max-width: 768px) {
+    .Chatting-Sec{
+        width: 60%;
+        height: 50vh;
+    }
+}
+@media (max-width: 415px) {
+    .Chatting-Sec{
+        width: 80%;
+        height: 50vh;
+    }
+}
