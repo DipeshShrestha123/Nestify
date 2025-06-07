@@ -1,9 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { useFormVisibility } from '../utils/FormContext';
 import './UpdateProfile.scss';
+import axios from "axios";
 
 const UpdateProfile = () => {
- const { closeForm } = useFormVisibility();
+  const { closeForm } = useFormVisibility();
 
   const {
     register,
@@ -18,9 +19,19 @@ const UpdateProfile = () => {
     },
   });
 
-  const onSubmit = (data) => {
-    console.log('Update Profile Data:', data);
-    reset();
+  const onSubmit = async (data) => {
+    try {
+      const res = await axios.put(
+        "http://localhost:8080/listdata/updateprofile",
+        data,
+        { withCredentials: true }
+      );
+      console.log("Update success:", res.data);
+      reset();
+      closeForm();
+    } catch (err) {
+      console.error("Update failed:", err.response?.data || err.message);
+    }
   };
 
   return (

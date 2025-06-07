@@ -1,48 +1,58 @@
 import { useState, useEffect } from "react";
-import "./Profile.scss"
+import "./Profile.scss";
 import axios from "axios";
-import { userdata } from "../../lib/listdata";
 import ListCard from '../card/ListCard';
 import Chat from '../chat/Chat';
 import FormContainer from '../form/FormContainer';
 import { useChat } from "../utils/ChatContext";
 import { useFormVisibility } from '../utils/FormContext';
+
 function Profile() {
   const { formType, openForm } = useFormVisibility();
   const { setIsChatVisible } = useChat();
-  const [ data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
 
-  // const handleUpdatePofileBtnClick = () => {
-  //   setFormType("updateProfile");
-  // }
-  // const handleAddPostBtnClick = () => {
-  //     setFormType("addPost");
-  // }
+  const [listData, setListData] = useState([]);
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  // Fetch listings
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchListData = async () => {
       try {
         const response = await axios.get("http://localhost:8080/listdata", {
           withCredentials: true,
         });
-        setLoading(true);
-        setData(response.data);
+        setListData(response.data);
       } catch (err) {
-        console.error("Error While Fetching Data", err);
-      } finally {
-        setLoading(false);
+        console.error("Error while fetching listings", err);
       }
     };
-    fetchData();
+
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/auth/me", {
+          withCredentials: true,
+        }); 
+        setUserData(response.data);
+      } catch (err) {
+        console.error("Error while fetching user data", err);
+      }
+    };
+
+    const fetchAll = async () => {
+      setLoading(true);
+      await Promise.all([fetchListData(), fetchUserData()]);
+      setLoading(false);
+    };
+
+    fetchAll();
   }, []);
 
   if (loading) return <div>Loading...</div>;
-  if (!data) return <div>Item not found</div>;
+  if (!userData) return <div>User not found</div>;
 
   return (
     <div className="Profile-Page">
-
       <div className="formCont">
         {formType && <FormContainer formType={formType} />}
       </div>
@@ -55,17 +65,18 @@ function Profile() {
           </div>
 
           <div className="About-User">
-            <span>Avatar: <img src={userdata[0].UserImg} alt="userImg" /> </span>
-            <span>Username: <b>{userdata[0].UserName}</b></span>
-            <span>E-mail: <b>{userdata[0].Email}</b></span>
+            <span>Avatar: <img src={userData.image || "/avatar.jpeg"} alt="userImg" /></span>
+            <span>Username: <b>{userData.username}</b></span>
+            <span>E-mail: <b>{userData.email}</b></span>
           </div>
 
           <div className="My-List">
             <span>My List</span>
-            <button  onClick={() => openForm('addPost')}>Add New Post</button>
+            <button onClick={() => openForm('addPost')}>Add New Post</button>
           </div>
+
           <div className="My-Listing">
-            {data.map((item) => (
+            {listData.map((item) => (
               <ListCard key={item._id} item={item} setIsChatVisible={setIsChatVisible} />
             ))}
           </div>
