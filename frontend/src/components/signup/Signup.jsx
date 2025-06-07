@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-// import './SignUp.scss';
+import './Signup.scss';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/AuthProvider";
 
