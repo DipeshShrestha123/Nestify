@@ -1,4 +1,3 @@
-import React from 'react';
 import './AgentPage.scss';
 
 export default function AgentPage() {

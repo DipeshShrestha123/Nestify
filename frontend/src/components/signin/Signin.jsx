@@ -19,7 +19,7 @@ const Signin = () => {
 
     try {
       await signIn({ email, password });
-
+      console.log(email,password);
       setIsLoggedIn(true); 
       navigate("/");
 

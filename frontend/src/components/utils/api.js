@@ -13,5 +13,10 @@ const api = axios.create({
 // Endpoint functions
 export const signIn = (data) => api.post("/auth/signin", data);
 export const signUp = (data) => api.post("/auth/signup", data);
+export const getListingById = (id) => api.get(`/listdata/${id}`);
+export const getUserData = () => api.get("/auth/me");
+export const getAllListings = () => api.get("/listdata");
+export const addPost = (data) => api.post("/listdata/addpost", data);
+export const updateProfile = (data) => api.put("/listdata/updateprofile", data);
 
 export default api;

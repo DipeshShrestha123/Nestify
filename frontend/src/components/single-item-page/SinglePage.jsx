@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import Slider from "../ImageSlider/Slider";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import "./SinglePage.scss";
 import { userdata } from "../../lib/listdata";
 import Map from "../map/Map";
+import { getListingById } from '../utils/api';
 
 export default function SinglePage() {
     const { _id } = useParams(); // Get the ID from the URL
@@ -15,10 +15,11 @@ export default function SinglePage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/listdata/${_id}`);
+                 const response = await getListingById(_id);
                 setItem(response.data);
             } catch (err) {
                 setError("Failed to load data");
+                console.log(err)
             } finally {
                 setLoading(false);
             }

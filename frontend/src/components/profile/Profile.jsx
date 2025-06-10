@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import "./Profile.scss";
-import axios from "axios";
 import ListCard from '../card/ListCard';
 import Chat from '../chat/Chat';
 import FormContainer from '../form/FormContainer';
 import { useChat } from "../utils/ChatContext";
 import { useFormVisibility } from '../utils/FormContext';
+import { getAllListings, getUserData } from "../utils/api"; 
 
 function Profile() {
   const { formType, openForm } = useFormVisibility();
@@ -15,34 +15,21 @@ function Profile() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch listings
   useEffect(() => {
-    const fetchListData = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/listdata", {
-          withCredentials: true,
-        });
-        setListData(response.data);
-      } catch (err) {
-        console.error("Error while fetching listings", err);
-      }
-    };
-
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/auth/me", {
-          withCredentials: true,
-        }); 
-        setUserData(response.data);
-      } catch (err) {
-        console.error("Error while fetching user data", err);
-      }
-    };
-
     const fetchAll = async () => {
-      setLoading(true);
-      await Promise.all([fetchListData(), fetchUserData()]);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const [listRes, userRes] = await Promise.all([
+          getAllListings(),
+          getUserData(),
+        ]);
+        setListData(listRes.data);
+        setUserData(userRes.data);
+      } catch (err) {
+        console.error("Error fetching profile data", err);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchAll();

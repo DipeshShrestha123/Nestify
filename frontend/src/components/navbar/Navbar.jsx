@@ -1,5 +1,5 @@
 import "./Navbar.scss";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../utils/AuthProvider";
 import { Link } from "react-router-dom";
 import Hamburger from "hamburger-react";

@@ -5,6 +5,7 @@ import ListCard from "../card/ListCard";
 import Filter from "../filter/Filter";
 import "../listpage/ListPage.scss";
 import Map from "../map/Map";
+import { getAllListings } from "../utils/api"; 
 
 export default function ListPage() {
     const location = useLocation();
@@ -18,10 +19,7 @@ export default function ListPage() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await axios.get("http://localhost:8080/listdata", {
-                    withCredentials: true,
-                });
-
+                const response = await getAllListings();
                 const locationFilter = queryParams.get("location") || "";
                 const typeFilter = queryParams.get("type") || "any";
                 const minPriceFilter = parseInt(queryParams.get("minPrice")) || 0;

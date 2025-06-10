@@ -1,7 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { useFormVisibility } from '../utils/FormContext';
 import './AddPost.scss';
-import axios from 'axios';
+import { addPost } from "../utils/api"; // ✅ Use centralized function
+
 
 const AddPost = () => {
   const { closeForm } = useFormVisibility();
@@ -12,37 +13,31 @@ const AddPost = () => {
     formState: { errors },
   } = useForm();
 
+  const getPosition = () =>
+  new Promise((resolve, reject) =>
+    navigator.geolocation.getCurrentPosition(resolve, reject)
+  );
+
+
 const onSubmit = async (data) => {
   try {
-    // Step 1: Get user's location
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        // Step 2: Append to data
-        data.latitude = position.coords.latitude;
-        data.longitude = position.coords.longitude;
+    const position = await getPosition();
+    data.latitude = position.coords.latitude;
+    data.longitude = position.coords.longitude;
 
-        // Step 3: Send POST request with updated data
-        const res = await axios.post(
-          'http://localhost:8080/listdata/addpost',
-          data,
-          {
-            withCredentials: true,
-          }
-        );
-
-        console.log('Post Created:', res.data);
-        reset();
-        closeForm();
-      },
-      (error) => {
-        console.error('Geolocation error:', error.message);
-        alert("Please allow location access to submit the form.");
-      }
-    );
+    const res = await addPost(data); // Centralized API call
+    console.log("Post Created:", res.data);
+    reset();
+    closeForm();
   } catch (err) {
-    console.error('Failed to create post:', err.response?.data || err.message);
+    if (err.code === 1) {
+      alert("Please allow location access to submit the form.");
+    } else {
+      console.error("Failed to create post:", err.message || err);
+    }
   }
 };
+
 
 
   return (

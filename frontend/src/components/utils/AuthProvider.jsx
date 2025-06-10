@@ -1,39 +1,43 @@
-import React, { createContext, useContext, useEffect, useState, useMemo } from "react";
-import axios from "axios";
+import { createContext, useContext, useEffect, useState, useMemo } from "react";
+import api from "../utils/api"; // adjust the path
 
-// Create Authentication Context
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
 
-    // Check authentication status on app load
+    // Check auth status on load
     useEffect(() => {
-        axios.get("http://localhost:8080/auth/checkAuthStatus", { withCredentials: true })
-            .then((res) => {
+        const checkAuth = async () => {
+            try {
+                const res = await api.get("/auth/checkAuthStatus");
                 setIsLoggedIn(res.data.isLoggedIn);
                 setUser(res.data.isLoggedIn ? res.data.user : null);
-            })
-            .catch(() => {
+            } catch (err) {
                 setIsLoggedIn(false);
                 setUser(null);
-            });
+                if (import.meta.env.DEV) console.error("Auth check failed:", err);
+            }
+        };
+        checkAuth();
     }, []);
 
     // Logout function
     const logout = async () => {
         try {
-            await axios.post("http://localhost:8080/auth/logout", {}, { withCredentials: true });
+            await api.post("/auth/logout");
             setIsLoggedIn(false);
             setUser(null);
-        } catch (error) {
-            console.error("Logout failed:", error);
+        } catch (err) {
+            if (import.meta.env.DEV) console.error("Logout failed:", err);
         }
     };
 
-    // Memoize context value for performance
-    const value = useMemo(() => ({ isLoggedIn, user, setIsLoggedIn, logout }), [isLoggedIn, user]);
+    const value = useMemo(
+        () => ({ isLoggedIn, user, setIsLoggedIn, setUser, logout }),
+        [isLoggedIn, user]
+    );
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
