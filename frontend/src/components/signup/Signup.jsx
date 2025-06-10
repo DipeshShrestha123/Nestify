@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import axios from 'axios';
 import './Signup.scss';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/AuthProvider";
+import { signUp } from '../utils/api';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -34,7 +34,7 @@ const Signup = () => {
     }
 
     try {
-      await axios.post("http://localhost:8080/auth/signup", formData,  { withCredentials: true });    
+      await signUp(formData);    
       setSuccessMessage("Account created successfully!");
       setIsLoggedIn(true); 
       setFormData({

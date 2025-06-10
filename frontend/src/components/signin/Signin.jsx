@@ -1,7 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/AuthProvider";
+import { signIn } from '../utils/api';
 import "./Signin.scss";
 
 const Signin = () => {
@@ -18,7 +18,7 @@ const Signin = () => {
     setIsLoading(true);
 
     try {
-       await axios.post("http://localhost:8080/auth/signin", { email, password }, { withCredentials: true });
+      await signIn({ email, password });
 
       setIsLoggedIn(true); 
       navigate("/");
