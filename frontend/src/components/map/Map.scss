@@ -3,3 +3,6 @@
     width: 100%;
     border-radius: 10px;
 }
+.leaflet-control-attribution {
+  display: none; /* ⚠️ Legally not recommended unless you own the data */
+}
